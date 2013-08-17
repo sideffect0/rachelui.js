@@ -1,3 +1,4 @@
+$(document).ready(function () {
   //@author:renlinx
   //UI Constants
     window.POPUP = {
@@ -10,9 +11,9 @@
     	"URGENT":"#dede75",
     	"SUCCESS":"#75de75",
     	"ERROR":"#de7575",
-    	"NORMAL":"#efefef"
+    	"NORMAL":"#8f8f8f"
     }
-       
+    window.OPENED = false; //flag for control functions   
   //UI Components
     
    
@@ -34,7 +35,11 @@
    return $overlay;
   });
   //Window
-    var createWindow = (function (title="title",content="hello",titlecolor=COLOR.NORMAL,contentcolor="#fff") {
+    window.createWindow = (function (title,content,titlecolor,contentcolor) {
+    	      title = title||"title";
+    	      content = content||"hello";
+    	      titlecolor = titlecolor||COLOR.NORMAL;
+    	      contentcolor = contentcolor||"#fff";
             var $window = $("<div>");
             var $title  = $("<div>");
             var $content = $("<div>");
@@ -48,7 +53,7 @@
               "background-color":contentcolor,
               "margin":"-150px 0 0 -150px",
               "z-index":"9999",
-              "border":"solid #de7575 1px",
+              "border":"solid "+ titlecolor +" 1px",
               "box-shadow":"0px 0px 5px #8f8f8f"
             });
             $title.css({
@@ -64,14 +69,25 @@
             $window.append($title);
             $window.append($content);
             $window = $window.appendTo($body);
+            OPENED = true;
             return $window;
   });
   //Popup
-  var Popup =  (function(title,content,type=POPUP.NORMAL){  
+  window.Popup =  (function(title,content,type){
+  title = title||"title";
+  content = content||"hello";
+  type = type||POPUP.NORMAL;
+  switch(type) {
+  	case POPUP.NORMAL:color = COLOR.NORMAL;break;
+  	case POPUP.URGENT:color = COLOR.URGENT;break;
+  	case POPUP.ERROR: color = COLOR.ERROR;break;
+  	case POPUP.SUCCESS: color = COLOR.SUCCESS;break; 
+  }  
   var $overlay = createOverlay();
-  var $window  = createWindow(title,content);
+  var $window  = createWindow(title,content,color);
   $overlay.click(function () {
   	$(this).fadeOut();
   	$window.fadeOut();
   });
+ });
  });
