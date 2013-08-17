@@ -1,0 +1,33 @@
+<html>
+ <head>
+  <script src="jquery.min.js"></script>
+  <script src="../rachelui.js"></script>
+  <script>
+  $(document).ready(function(){
+    var $content = $("<div>");
+    var $button1 = $("<button>");
+    var $button2 = $("<button>");
+    var $button3 = $("<button>");
+    var $button4 = $("<button>");
+    $button1.text("popup_success").on("click",function(){
+       Popup("Popup From Rachel UI","Click Any where To Close (POPUP.SUCCESS)",POPUP.SUCCESS);
+    });
+    $button2.text("popup_error").on("click",function(){
+       Popup("Popup From Rachel UI","Using POPUP.ERROR",POPUP.ERROR);
+    });
+    $button3.text("popup_urgent").on("click",function(){
+       Popup("Popup From Rachel UI","Using POPUP.URGENT",POPUP.URGENT);
+    });
+    $button4.text("popup_normal").on("click",function(){
+       Popup("Popup From Rachel UI","Using POPUP.NORMAL",POPUP.NORMAL);
+    });
+    $content.append($button1);
+    $content.append($button2);
+    $content.append($button3);
+    $content.append($button4);  //U can $.copy :P  
+    var $window = createWindow("Hello World",$content);
+   });  
+  </script>
+ </head>
+ <body></body>
+</html>
