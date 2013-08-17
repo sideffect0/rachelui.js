@@ -1,4 +1,4 @@
 rachelui.js
 ===========
 
-A Javascript UI framework for minimising complexity of rapid design
+A simple Javascript UI framework to ease web application development
