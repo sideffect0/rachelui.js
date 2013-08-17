@@ -2,16 +2,16 @@ $(document).ready(function () {
   //@author:renlinx
   //UI Constants
     window.POPUP = {
-    	"URGENT": 0,
-    	"SUCCESS" : 1,
-    	"ERROR" : 2,
-    	"NORMAL":3
+    	URGENT: 0,
+    	SUCCESS: 1,
+    	ERROR: 2,
+    	NORMAL:3
     };
     window.COLOR = {
-    	"URGENT":"#dede75",
-    	"SUCCESS":"#75de75",
-    	"ERROR":"#de7575",
-    	"NORMAL":"#8f8f8f"
+    	URGENT:"#dede75",
+    	SUCCESS:"#75de75",
+    	ERROR:"#de7575",
+    	NORMAL:"#8f8f8f"
     }
     window.OPENED = false; //flag for control functions   
   //UI Components
