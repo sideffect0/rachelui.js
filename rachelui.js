@@ -2,10 +2,10 @@ $(document).ready(function () {
   //@author:renlinx
   //UI Constants
     window.POPUP = {
-    	URGENT: 0,
-    	SUCCESS: 1,
-    	ERROR: 2,
-    	NORMAL:3
+    	URGENT: 1,
+    	SUCCESS: 2,
+    	ERROR: 3,
+    	NORMAL:4
     };
     window.COLOR = {
     	URGENT:"#dede75",
@@ -18,7 +18,7 @@ $(document).ready(function () {
     
    
   //Overlay
-   var createOverlay = (function(){
+   window.bodyOverlay = (function(){
   	var $overlay = $("<div>");	
   	var $body = $("body");
   	$overlay = $overlay.css({
@@ -32,6 +32,22 @@ $(document).ready(function () {
     "background-color":"#000"
    });
    $overlay = $overlay.appendTo($body);
+   return $overlay;
+  });
+
+  window.divOverlay = (function($div,$content){
+   $div = $div||$("body");
+   $overlay_pos = $div.offset();
+   $overlay = $("<div>");
+   $overlay.css({
+    position:"absolute",
+    top:$overlay_pos.top,
+    left:$overlay_pos.left,
+    width:$div.css("width"),
+    height:$div.css("height"),
+    "background-color":"#000",
+    opacity:"0.6"
+   }).html($content);
    return $overlay;
   });
   //Window
@@ -83,7 +99,7 @@ $(document).ready(function () {
   	case POPUP.ERROR: color = COLOR.ERROR;break;
   	case POPUP.SUCCESS: color = COLOR.SUCCESS;break; 
   }  
-  var $overlay = createOverlay();
+  var $overlay = bodyOverlay();
   var $window  = createWindow(title,content,color);
   $overlay.click(function () {
   	$(this).fadeOut();
