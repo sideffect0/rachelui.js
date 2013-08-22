@@ -106,4 +106,81 @@ $(document).ready(function () {
   	$window.fadeOut();
   });
  });
+ 	window.MSGBOX = {
+		"ERROR":"#ff8888",
+		"SUCCESS":"#aaffbb",
+		"NORMAL":"#8f8f8f"
+	}
+	window.MsgBox = (function ($title,$message,$type,$height,$width) {
+           $message = $message||" ";
+           $title   = $title||"Message";
+           $height  = $height||"300";
+           $width   = $width||"300";
+           $type    = $type||MSGBOX.NORMAL;
+       var $overlay = $("<div>");		
+		 var $msgbox  = $("<div>");
+		 var $content = $("<div>");
+		 var $titlebox= $("<div>");
+		 var $button  = $("<div>");
+		 var $body    = $("body");
+		 $overlay.css({
+		 	"position":"fixed",
+		 	"top":"0",
+		 	"left":"0",
+		 	"width":"110%",
+		 	"height":"110%",
+		 	"background-color":"#fff",
+		 	"opacity":"0.5",
+		 	"z-index":"88888"
+		 })
+		 $msgbox.css({
+              "position":"fixed",
+              "width":"300px",
+              "height":"200px",
+              "left":"50%", 
+              "top":"50%", 
+              "background-color":"#fff",
+              "color" : "#222",
+              "margin":"-100px 0 0 -150px",
+              "z-index":"99999",
+              "border":"solid "+$type+" 1px",
+              "box-shadow":"0px 0px 5px #8f8f8f"
+            });
+       $titlebox.css({
+       	"width":"100%",
+       	"background-color":"#2b60de",
+       	"color":"#fff",
+       	"font-weight":"bold",
+       	"text-align":"center"
+       }).html($title);
+       $content.css({
+               "padding":"8px",
+               "text-align":"center",
+               "top":"10%"
+            }).html($message);
+       $button.css({
+       	"position":"relative",
+       	"background-color":"#2b60de",
+       	"height":"35px",
+       	"width":"55px",
+       	"color":"#fff",
+       	"margin-left":"auto",
+       	"margin-right":"auto",
+       	"text-align":"center",
+       	"padding-top":"4px",
+       	"cursor":"pointer"
+       }).text("OK").on("click",function () {
+       	setTimeout(function () {
+       		$overlay.remove();
+       		$msgbox.remove();
+       	},30)
+       });
+       $body.append($overlay);
+       $msgbox.append($titlebox);
+       $msgbox.append($content);
+       $msgbox.append($button);
+       $msgbox.appendTo($body);
+       return $msgbox;
+	});
+
  });
